@@ -4,11 +4,17 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
+import messaging from "@react-native-firebase/messaging";
+import { registerRootComponent } from "expo";
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  console.log("Bg Handls set");
+});
+
+messaging().onTokenRefresh((newToken: string) => { })
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
